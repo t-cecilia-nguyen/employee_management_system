@@ -1,54 +1,72 @@
-<div class="container mt-5">
-    <h2>Signup</h2>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="mt-4">
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input
-          type="text"
-          id="name"
-          class="form-control"
-          formControlName="name"
-          [class.is-invalid]="signupForm.get('name')?.invalid && signupForm.get('name')?.touched"
-        />
-        <div class="invalid-feedback">Name is required.</div>
-      </div>
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow p-4" style="width: 400px;">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Sign Up</h3>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <!-- Username Field -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            id="username"
+            class="form-control"
+            formControlName="username"
+            [class.is-invalid]="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+          />
+          <div class="invalid-feedback">Username is required.</div>
+        </div>
 
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input
-          type="email"
-          id="email"
-          class="form-control"
-          formControlName="email"
-          [class.is-invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
-        />
-        <div class="invalid-feedback">Valid email is required.</div>
-      </div>
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+            [class.is-invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+          />
+          <div class="invalid-feedback">Valid email is required.</div>
+        </div>
 
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          formControlName="password"
-          [class.is-invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
-        />
-        <div class="invalid-feedback">Password is required (min 6 characters).</div>
-      </div>
+        <!-- Password Field -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            formControlName="password"
+            [class.is-invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+          />
+          <div class="invalid-feedback">Password is required (min 6 characters).</div>
+        </div>
 
-      <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          class="form-control"
-          formControlName="confirmPassword"
-          [class.is-invalid]="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
-        />
-        <div class="invalid-feedback">Passwords must match.</div>
-      </div>
+        <!-- Confirm Password Field -->
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            formControlName="confirmPassword"
+            [class.is-invalid]="signupForm.hasError('notMatching')"
+          />
+          <div class="invalid-feedback">Passwords must match.</div>
+        </div>
 
-      <button class="btn btn-success" type="submit" [disabled]="signupForm.invalid">Signup</button>
-    </form>
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button class="btn btn-success" type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+        </div>
+      </form>
+
+      <!-- Login Link -->
+      <div class="text-center mt-3">
+        <p class="mb-0">
+          Already have an account?
+          <a routerLink="/login" class="text-primary">Log in</a>
+        </p>
+      </div>
+    </div>
   </div>
+</div>
