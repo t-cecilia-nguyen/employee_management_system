@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client/core';
 import { Router, RouterLinkWithHref } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,9 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder, 
     private apolloClient: ApolloClient<InMemoryCache>,
-    private router: Router) {
+    private router: Router,
+    private authService: AuthService,
+  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -43,6 +46,11 @@ export class LoginComponent {
         })
         .then(result => {
           console.log('Login successful:', result.data);
+
+          // Save the token using AuthService
+          const token = result.data.login.token;
+          this.authService.setToken(token);
+          
           alert('Login successful!');
           this.router.navigate(['/employee']); // Navigate to employee page on successful login
         })
