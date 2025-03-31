@@ -5,6 +5,7 @@ const userSchema = require('./schemas/userSchema');
 const userResolvers = require('./resolvers/userResolver');
 const employeeSchema = require('./schemas/employeeSchema');
 const employeeResolver = require('./resolvers/employeeResolver');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => console.error("MongoDB connection error:", err));
 
 const app = express();
+app.use(cors({ origin: "http://localhost:4200", credentials: true }));
 
 // Middleware
 app.use(express.json());
