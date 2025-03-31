@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <h3>Employee Details</h3>
+    <table class="table table-bordered">
+      <tbody *ngIf="employee">
+        <tr>
+            <th>ID</th>
+            <td>{{ employee.id }}</td>
+            </tr>
+            <tr>
+            <th>First Name</th>
+            <td>{{ employee.first_name }}</td>
+            </tr>
+            <tr>
+            <th>Last Name</th>
+            <td>{{ employee.last_name }}</td>
+            </tr>
+            <tr>
+            <th>Email</th>
+            <td>{{ employee.email }}</td>
+            </tr>
+            <tr>
+            <th>Gender</th>
+            <td>{{ employee.gender }}</td>
+            </tr>
+            <tr>
+            <th>Designation</th>
+            <td>{{ employee.designation }}</td>
+            </tr>
+            <tr>
+            <th>Salary</th>
+            <td>${{ employee.salary }}</td>
+            </tr>
+            <tr>
+            <th>Department</th>
+            <td>{{ employee.department }}</td>
+            </tr>
+            <tr>
+            <th>Date of Joining</th>
+            <td>{{ date_of_joining }}</td>
+            </tr>
+        </tbody>
+        <tr *ngIf="!employee">
+            <td colspan="2" class="text-center">Loading employee details...</td>
+        </tr>
+    </table>
+    
+    <!-- Back Button -->
+    <button class="btn btn-secondary mb-3" (click)="goBack()">Back</button>
+</div>

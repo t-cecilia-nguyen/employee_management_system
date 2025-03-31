@@ -45,10 +45,10 @@ export class EmployeeComponent {
     });    
   }
 
-  viewDetails(employeeId: string) {
-    console.log('View employee details:', employeeId);
+  viewDetails(employeeId: string): void {
+    this.router.navigate([`/employees/${employeeId}`]); // Navigate to details page
   }
-
+  
   editEmployee(employeeId: string) {
     console.log('Edit employee:', employeeId);
   }
