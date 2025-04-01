@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => console.error("MongoDB connection error:", err));
 
 const app = express();
-app.use(cors({ origin: "http://localhost:4200", credentials: true }));
+app.use(cors({ origin: "https://100749684-comp3133-assignment2.vercel.app", credentials: true }));
 
 // Middleware
 app.use(express.json());
