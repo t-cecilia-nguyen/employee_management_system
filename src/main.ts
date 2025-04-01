@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 const apolloClient = new ApolloClient({
-  uri: 'https://100749684-comp-3133-assignment1-b9qw7n5jz.vercel.app/graphql',
+  uri: 'https://100749684-comp-3133-assignment1.vercel.app/graphql',
   cache: new InMemoryCache(),
 });
 
