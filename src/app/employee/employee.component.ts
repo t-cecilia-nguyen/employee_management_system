@@ -59,8 +59,8 @@ export class EmployeeComponent implements OnInit {
     this.router.navigate([`/employees/${employeeId}`]); // Navigate to details page
   }
   
-  editEmployee(employeeId: string) {
-    console.log('Edit employee:', employeeId);
+  editEmployee(employeeId: string): void {
+    this.router.navigate([`/update-employee/${employeeId}`]); // Navigate to update employee page
   }
 
   deleteEmployee(employeeId: string) {
