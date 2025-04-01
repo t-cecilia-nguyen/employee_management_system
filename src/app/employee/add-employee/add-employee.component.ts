@@ -113,7 +113,9 @@ export class AddEmployeeComponent {
           console.log('Employee added successfully:', result.data);
           alert('Employee added successfully!');
           this.employeeForm.reset(); // Clear form
-          this.router.navigate(['/employee']); // Navigate to employee list
+          this.router.navigate(['/employee']).then(() => {  // Navigate to employee list
+            window.location.reload(); // Reload the page to reflect changes
+          });
         })
         .catch((error) => {
           console.error('Error adding employee:', error);

@@ -20,7 +20,7 @@ export class EmployeeComponent implements OnInit {
     private router: Router) {}
 
     ngOnInit() {
-      this.fetchEmployees(); // Call fetchEmployees when component loads
+      this.fetchEmployees(); // Call when component loads
     }
 
     fetchEmployees() {
@@ -64,8 +64,22 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employeeId: string) {
-    console.log('Delete employee:', employeeId);
-  }
+    const DELETE_EMPLOYEE_MUTATION = gql`
+      mutation DeleteEmployee($id: ID!) {
+        deleteEmployee(id: $id)
+      }
+    `;
+  
+    if (confirm('Are you sure you want to delete this employee?')) {
+      this.apolloClient
+        .mutate({ mutation: DELETE_EMPLOYEE_MUTATION, variables: { id: employeeId } })
+        .then(() => {
+          alert('Employee deleted successfully!');
+          window.location.reload(); // Refresh list after deletion
+        })
+        .catch((error) => console.error('Error deleting employee:', error));
+    }
+  }  
 
   signOut() {
     alert('You have been successfully signed out.');
