@@ -8,6 +8,7 @@ const employeeResolver = require('./resolvers/employeeResolver');
 const cors = require('cors');
 
 require('dotenv').config();
+const PORT = process.env.PORT || 4000;
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
@@ -32,8 +33,8 @@ async function startApolloServer() {
     await server.start();
     server.applyMiddleware({ app });
 
-    app.listen(4000, () => {
-        console.log(`Server running at http://localhost:4000${server.graphqlPath}`);
+    app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}${server.graphqlPath}`);
     });
 }
 
