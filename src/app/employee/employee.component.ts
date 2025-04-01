@@ -3,16 +3,19 @@ import { ApolloClient, InMemoryCache, gql } from '@apollo/client/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service'; 
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
   employees: any[] = [];
+  searchDesignation: string = '';
+  searchDepartment: string = '';
 
   constructor(
     private apolloClient: ApolloClient<InMemoryCache>,
@@ -23,8 +26,25 @@ export class EmployeeComponent implements OnInit {
       this.fetchEmployees(); // Call when component loads
     }
 
-    fetchEmployees() {
-      const GET_ALL_EMPLOYEES = gql`
+    fetchEmployees(searchDesignation?: string, searchDepartment?: string) {
+      const EMPLOYEE_QUERY = searchDesignation || searchDepartment 
+      ? gql`
+        query SearchEmployee($designation: String, $department: String) {
+          searchEmployee(designation: $designation, department: $department) {
+            id
+            first_name
+            last_name
+            email
+            gender
+            designation
+            salary
+            date_of_joining
+            department
+            employee_photo
+            }
+          }
+        `
+        : gql`
         query GetAllEmployees {
           getAllEmployees {
             id
@@ -37,16 +57,24 @@ export class EmployeeComponent implements OnInit {
             date_of_joining
             department
             employee_photo
-            created_at
-            updated_at
           }
         }
       `;
 
-    this.apolloClient.query({ query: GET_ALL_EMPLOYEES }).then((result: any) => {
-      console.log('Fetched Employees:', result.data.getAllEmployees);
-      this.employees = result.data.getAllEmployees;
-    }).catch(error => {
+    this.apolloClient
+    .query({
+      query: EMPLOYEE_QUERY,
+      variables: searchDesignation || searchDepartment ? { designation: searchDesignation, department: searchDepartment } : {},
+    })
+    .then((result: any) => {
+      console.log('Fetched Employees:', result.data.getAllEmployees || result.data.searchEmployee);
+      this.employees = result.data.getAllEmployees || result.data.searchEmployee; // Update employee list
+    
+      // Clear search fields after fetching results
+      this.searchDesignation = '';
+      this.searchDepartment = '';
+    })
+    .catch((error) => {
       console.error('Error fetching employees:', error);
     });    
   }
