@@ -21,9 +21,9 @@
             <label for="department" class="form-label">Department</label>
             <input type="text" id="department" class="form-control" formControlName="department" />
         </div>
-        <button type="submit" class="btn btn-success">Update Employee</button>
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-success">Update Employee</button>
+            <button class="btn btn-secondary" (click)="goBack()">Cancel</button>
+        </div>
     </form>
-    
-    <!-- Back Button -->
-    <button class="btn btn-secondary mb-3" (click)="goBack()">Back</button>
 </div>

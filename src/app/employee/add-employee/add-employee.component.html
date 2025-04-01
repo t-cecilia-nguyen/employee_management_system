@@ -41,9 +41,9 @@
             <label for="employee_photo" class="form-label">Profile Picture</label>
             <input type="file" id="employee_photo" class="form-control" (change)="onFileChange($event)" />
         </div>
-        <button type="submit" class="btn btn-success" [disabled]="employeeForm.invalid">Add Employee</button>
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-success" [disabled]="employeeForm.invalid">Add Employee</button>
+            <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
+        </div>
     </form>
-    
-    <!-- Back Button -->
-    <button class="btn btn-secondary mb-3" (click)="goBack()">Back</button>
 </div>
