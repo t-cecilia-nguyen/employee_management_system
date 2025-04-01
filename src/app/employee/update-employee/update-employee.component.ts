@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-employee',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './update-employee.component.html',
   styleUrls: ['./update-employee.component.css'],
 })
@@ -29,11 +30,11 @@ export class UpdateEmployeeComponent implements OnInit {
 
   initializeForm() {
     this.employeeForm = this.fb.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      designation: ['', Validators.required],
-      salary: ['', Validators.required],
-      department: ['', Validators.required],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      designation: ['', [Validators.required]],
+      salary: ['', [Validators.required, Validators.min(1000)]],
+      department: ['', [Validators.required]],
     });
   }
 
@@ -60,6 +61,11 @@ export class UpdateEmployeeComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.employeeForm.invalid) {
+      Object.values(this.employeeForm.controls).forEach(control => control.markAsTouched());
+      return;
+    }
+
     const UPDATE_EMPLOYEE_MUTATION = gql`
       mutation UpdateEmployee(
         $id: ID!,

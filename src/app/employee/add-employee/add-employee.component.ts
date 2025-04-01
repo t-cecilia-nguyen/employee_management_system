@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client/core';
 import { Router } from '@angular/router';
 import imageCompression from 'browser-image-compression';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css'],
 })
@@ -24,10 +25,10 @@ export class AddEmployeeComponent {
       email: ['', [Validators.required, Validators.email]],
       gender: ['', [Validators.required]],
       designation: ['', [Validators.required]],
-      salary: ['', [Validators.required]],
+      salary: ['', [Validators.required, Validators.min(1000)]],
       date_of_joining: ['', [Validators.required]],
       department: ['', [Validators.required]],
-      employee_photo: [null],
+      employee_photo: ['', [Validators.required]],
     });
   }
 
@@ -68,8 +69,12 @@ export class AddEmployeeComponent {
 
   // Submit form data to GraphQL server
   onSubmit() {
-    if (this.employeeForm.valid) {
-      const ADD_EMPLOYEE_MUTATION = gql`
+    if (this.employeeForm.invalid) {
+      Object.values(this.employeeForm.controls).forEach(control => control.markAsTouched());
+      return;
+    }
+
+    const ADD_EMPLOYEE_MUTATION = gql`
         mutation AddEmployee(
           $first_name: String!,
           $last_name: String!,
@@ -100,30 +105,27 @@ export class AddEmployeeComponent {
         }
       `;
 
-      const photo = this.employeeForm.value.employee_photo;
-      console.log('Photo size (Base64):', photo ? photo.length : 0, 'characters');
+    const photo = this.employeeForm.value.employee_photo;
+    console.log('Photo size (Base64):', photo ? photo.length : 0, 'characters');
 
-      // Perform GraphQL mutation
-      this.apolloClient
-        .mutate({
-          mutation: ADD_EMPLOYEE_MUTATION,
-          variables: { ...this.employeeForm.value },
-        })
-        .then((result) => {
-          console.log('Employee added successfully:', result.data);
-          alert('Employee added successfully!');
-          this.employeeForm.reset(); // Clear form
-          this.router.navigate(['/employee']).then(() => {  // Navigate to employee list
-            window.location.reload(); // Reload the page to reflect changes
-          });
-        })
-        .catch((error) => {
-          console.error('Error adding employee:', error);
-          alert('Failed to add employee.');
+    // Perform GraphQL mutation
+    this.apolloClient
+      .mutate({
+        mutation: ADD_EMPLOYEE_MUTATION,
+        variables: { ...this.employeeForm.value },
+      })
+      .then((result) => {
+        console.log('Employee added successfully:', result.data);
+        alert('Employee added successfully!');
+        this.employeeForm.reset(); // Clear form
+        this.router.navigate(['/employee']).then(() => {  // Navigate to employee list
+          window.location.reload(); // Reload the page to reflect changes
         });
-    } else {
-      alert('Please complete all required fields.');
-    }
+      })
+      .catch((error) => {
+        console.error('Error adding employee:', error);
+        alert('Failed to add employee.');
+      });
   }
 
   goBack(): void {

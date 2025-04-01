@@ -20,6 +20,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
+// const apolloClient = new ApolloClient({
+//   uri: 'http://localhost:4000/graphql',
+//   cache: new InMemoryCache(),
+// });
+
 const apolloClient = new ApolloClient({
   uri: 'https://100749684-comp-3133-assignment1.vercel.app/graphql',
   cache: new InMemoryCache(),

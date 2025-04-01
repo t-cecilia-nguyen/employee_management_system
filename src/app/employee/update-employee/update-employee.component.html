@@ -4,22 +4,37 @@
         <div class="mb-3">
             <label for="first_name" class="form-label">First Name</label>
             <input type="text" id="first_name" class="form-control" formControlName="first_name" />
+            <div *ngIf="employeeForm.controls['first_name'].invalid && employeeForm.controls['first_name'].touched" class="text-danger">
+                First name is required.
+            </div>
         </div>
         <div class="mb-3">
             <label for="last_name" class="form-label">Last Name</label>
             <input type="text" id="last_name" class="form-control" formControlName="last_name" />
+            <div *ngIf="employeeForm.controls['last_name'].invalid && employeeForm.controls['last_name'].touched" class="text-danger">
+                Last name is required.
+            </div>
         </div>
         <div class="mb-3">
             <label for="designation" class="form-label">Designation</label>
             <input type="text" id="designation" class="form-control" formControlName="designation" />
+            <div *ngIf="employeeForm.controls['designation'].invalid && employeeForm.controls['designation'].touched" class="text-danger">
+                Designation is required.
+            </div>
         </div>
         <div class="mb-3">
             <label for="salary" class="form-label">Salary</label>
             <input type="number" id="salary" class="form-control" formControlName="salary" />
+            <div *ngIf="employeeForm.controls['salary'].invalid && employeeForm.controls['salary'].touched" class="text-danger">
+                Salary is required (minimum value 1000).
+            </div>
         </div>
         <div class="mb-3">
             <label for="department" class="form-label">Department</label>
             <input type="text" id="department" class="form-control" formControlName="department" />
+            <div *ngIf="employeeForm.controls['department'].invalid && employeeForm.controls['department'].touched" class="text-danger">
+                Department is required.
+            </div>
         </div>
         <div class="d-flex gap-2 mt-3">
             <button type="submit" class="btn btn-success">Update Employee</button>
