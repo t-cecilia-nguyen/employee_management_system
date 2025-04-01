@@ -5,11 +5,6 @@ import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet, RouterLinkWithHref],
   template: `
-    <nav>
-      <a routerLink="/login">Login</a>
-      <a routerLink="/signup">Signup</a>
-      <a routerLink="/employee">Employee</a>
-    </nav>
     <router-outlet></router-outlet>
   `,
 })
