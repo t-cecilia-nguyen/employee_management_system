@@ -8,7 +8,7 @@ The app provides a seamless and responsive user experience via an Angular fronte
 
 ## 🚀 Live Demo
 
-🌐 [Deployed on Vercel: ](https://100749684-comp3133-assignment2.vercel.app/login)  
+🌐 [Deployed on Vercel](https://100749684-comp3133-assignment2.vercel.app/login)  
 
 ## 🌟 Features
 
