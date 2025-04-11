@@ -1,59 +1,28 @@
-# 100749684Comp3133Assignment2
+# 💻 Employee Management System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+## 📄 Description
 
-## Development server
+The **Employee Management System** is a full-stack web application designed to help manage employee data efficiently. It allows users to **add**, **retrieve**, **update**, and **delete** employee records, all while maintaining data integrity through proper validation and error handling.
 
-To start a local development server, run:
+The app provides a seamless and responsive user experience via an Angular frontend and a robust backend built with Node.js, Express.js, and GraphQL.
 
-```bash
-ng serve
-```
+## 🚀 Live Demo
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+🌐 **Deployed on Vercel:**  
+[Vercel Link](https://100749684-comp3133-assignment2.vercel.app/login)  
 
-## Code scaffolding
+## 🌟 Features
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Create, Read, Update, Delete (CRUD) employee records
+- Form validation & error handling
+- JWT-based authentication
+- Passwords hashed with Bcrypt
+- Responsive Angular UI
+- Styled with Bootstrap
+- GraphQL API with Apollo Server
 
-```bash
-ng generate component component-name
-```
+## 🧑‍💼 Test User
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+You can log in using the following test user credentials to try out the app:
+- Email: `username_1`
+- Password: `password` (This password is hashed in the database)
